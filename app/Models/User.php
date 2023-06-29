@@ -8,33 +8,28 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
-{
-    use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'users';
+use Tymon\JWTAuth\Contracts\JWTSubject;
+
+class User extends Authenticatable implements JWTSubject
+{
+    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $fillable = [
         'name',
         'email',
-        'username',
         'password',
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * The attributes that should be hidden for arrays.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $hidden = [
         'password',
@@ -42,22 +37,29 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be cast.
+     * The attributes that should be cast to native types.
      *
-     * @var array<string, string>
+     * @var array
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
 
     /**
-     * Always encrypt password when it is updated.
+     * Get the identifier that will be stored in the subject claim of the JWT.
      *
-     * @param $value
-     * @return string
+     * @return mixed
      */
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = bcrypt($value);
+    public function getJWTIdentifier() {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims() {
+        return [];
     }
 }
