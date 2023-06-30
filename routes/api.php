@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MyExersiseController;
 use App\Http\Controllers\MyDiaryController;
 use App\Http\Controllers\MealHistoryController;
+use App\Http\Controllers\MyRecordController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -42,6 +43,11 @@ Route::group([
 
     Route::get('/diary/get-my-diary', [MyDiaryController::class, 'index']);
     Route::post('/diary/store', [MyDiaryController::class, 'store']);
+
+
+    Route::get('/record/get-my-record', [MyRecordController::class, 'index']);
+    Route::post('/record/store', [MyRecordController::class, 'store']);
+
 
     Route::get('/meal-history/get-meal-history', [MealHistoryController::class, 'index']);
 });
