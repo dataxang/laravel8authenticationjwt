@@ -31,3 +31,19 @@ Route::group([
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
     Route::post('/change-pass', [AuthController::class, 'changePassWord']);
 });
+
+
+
+Route::group(['namespace' => 'App\Http\Controllers'], function()
+{
+
+
+    Route::group(['middleware' => ['guest']], function() {
+        /**
+         * Login Routes
+         */
+        Route::get('/get-recommendation', 'PostController@getRecommendation');
+
+    });
+
+});
