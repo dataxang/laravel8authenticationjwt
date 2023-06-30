@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MyExersiseController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,6 +31,10 @@ Route::group([
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
     Route::post('/change-pass', [AuthController::class, 'changePassWord']);
+
+    //exsersise
+
+    Route::get('/exersise/get-my-exersise', [MyExersiseController::class, 'index']);
 });
 
 
@@ -39,9 +44,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 
 
     Route::group(['middleware' => ['guest']], function() {
-        /**
-         * Login Routes
-         */
         Route::get('/get-recommendation', 'PostController@getRecommendation');
 
     });
