@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MyExersiseController;
+use App\Http\Controllers\MyDiaryController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -36,6 +37,10 @@ Route::group([
 
     Route::get('/exersise/get-my-exersise', [MyExersiseController::class, 'index']);
     Route::post('/exersise/store', [MyExersiseController::class, 'store']);
+
+
+    Route::get('/diary/get-my-diary', [MyDiaryController::class, 'index']);
+    Route::post('/diary/store', [MyDiaryController::class, 'store']);
 });
 
 
