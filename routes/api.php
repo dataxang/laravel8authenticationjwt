@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MyExersiseController;
 use App\Http\Controllers\MyDiaryController;
+use App\Http\Controllers\MealHistoryController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -41,6 +42,8 @@ Route::group([
 
     Route::get('/diary/get-my-diary', [MyDiaryController::class, 'index']);
     Route::post('/diary/store', [MyDiaryController::class, 'store']);
+
+    Route::get('/meal-history/get-meal-history', [MealHistoryController::class, 'index']);
 });
 
 
