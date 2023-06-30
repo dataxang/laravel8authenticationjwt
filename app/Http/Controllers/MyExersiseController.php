@@ -34,4 +34,33 @@ class MyExersiseController extends Controller
         ];
     }
 
+
+    /**
+     * @return mixed
+     */
+    public function store()
+    {
+        request()->validate([
+            'action' => 'required',
+            'level' => 'required',
+            'energy' => 'required',
+            'duration' => 'required',
+        ]);
+        //get logged-in user
+        $userId = auth()->user()->id;
+
+        return Exersise::create([
+            'user_id' => $userId,
+            'date' => date("Y-m-d",time()),
+            'action' => request('action'),
+            'level' => request('level'),
+            'energy' => request('energy'),
+            'duration' => request('duration'),
+            'description' => request('description'),
+            'created_by' => $userId,
+            'updated_by' => $userId,
+            'created_at' => time(),
+            'updated_at' => time(),
+        ]);
+    }
 }

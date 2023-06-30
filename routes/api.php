@@ -35,6 +35,7 @@ Route::group([
     //exsersise
 
     Route::get('/exersise/get-my-exersise', [MyExersiseController::class, 'index']);
+    Route::post('/exersise/store', [MyExersiseController::class, 'store']);
 });
 
 

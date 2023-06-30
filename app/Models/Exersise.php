@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 class Exersise extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -27,6 +28,11 @@ class Exersise extends Model
         'level',
         'energy',
         'duration',
+        'created_by',
+        'updated_by',
+        'date',
+        'created_at',
+        'updated_at',
     ];
 
 }
