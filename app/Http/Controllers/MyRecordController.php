@@ -27,7 +27,11 @@ class MyRecordController extends Controller
      */
     public function index() {
 
-        $record = Record::latest()->paginate(10);
+        //get logged-in user
+        $userId = auth()->user()->id;
+        $record = Record::latest()
+            ->where(['user_id' => $userId])
+            ->paginate(10);
         return [
             "status" => 1,
             "data" => $record
@@ -57,5 +61,27 @@ class MyRecordController extends Controller
             'created_at' => time(),
             'updated_at' => time(),
         ]);
+    }
+
+
+    /**
+     * Get the authenticated User.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getMyRecordGraph() {
+
+
+        //get logged-in user
+        $userId = auth()->user()->id;
+        $record = Record::latest()
+            ->select(['weight','fat','date',\DB::raw('SUBSTR(date,6,2) as month')])
+            ->where(['user_id' => $userId])
+            ->orderBy('date', 'ASC')
+            ->paginate(10);
+        return [
+            "status" => 1,
+            "data" => $record
+        ];
     }
 }

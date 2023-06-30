@@ -46,6 +46,7 @@ Route::group([
 
 
     Route::get('/record/get-my-record', [MyRecordController::class, 'index']);
+    Route::get('/record/get-my-record-graph', [MyRecordController::class, 'getMyRecordGraph']);
     Route::post('/record/store', [MyRecordController::class, 'store']);
 
 
